@@ -27,8 +27,11 @@ cleaned AS (
       ELSE NULL
     END AS brand,
 
-    -- 3. Extract PRODUCT (digits after brand prefix)
-    REGEXP_SUBSTR(sku, '^[A-Za-z]{3}([0-9]+)', 1, 1, 'e', 1) AS product,
+    -- 3. Extract PRODUCT (digits after brand prefix alphanumeric)
+    CASE 
+      WHEN POSITION(' ', sku) > 3 THEN SUBSTRING(sku, 4, POSITION(' ', sku) - 4)
+      ELSE NULL
+    END AS product,
 
     -- 4. Cast POS_UNITS to integer
     TRY_CAST(pos_units AS INTEGER) AS pos_units,
