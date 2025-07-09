@@ -9,7 +9,7 @@ Clean and standardize customer POS data by:
 - Managing null and blank values
 
 ---
-created snowflake DB and schemas and uploaded the csv data into the schema
+Created Snowflake DB and Schemas and loaded the csv data into the schema
 ## 🧪 Source Table
 
 - **Database:** `BRONZE`
