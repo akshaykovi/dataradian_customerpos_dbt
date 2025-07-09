@@ -36,7 +36,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  dataradian_customerpos:
     +materialized: table
     +database: SILVER
-    +schema: TRANSFORMED_POS
+ #   +schema: TRANSFORMED_POS

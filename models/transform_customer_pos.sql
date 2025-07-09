@@ -1,9 +1,4 @@
-{{ config(
-    materialized='table',
-    database='SILVER',
-    schema='TRANSFORMED_POS', 
-) }}
-
+{{ config(alias='transform_customer_pos') }}
 WITH source AS (
   SELECT * FROM BRONZE.POS.CUSTOMER_POS
 ),
