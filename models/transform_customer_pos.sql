@@ -9,10 +9,10 @@ cleaned AS (
 
     -- 1. Standardize multiple date formats (to yyyy-mm-dd)
     COALESCE(
-      TRY_TO_DATE(date, 'DD-MM-YYYY'),
-      TRY_TO_DATE(date, 'DD-Mon-YY'),
-      TRY_TO_DATE(date, 'YYYY-MM-DD')
-    ) AS date,
+          TRY_TO_DATE(NULLIF(date, ''), 'DD-MM-YYYY'),
+          TRY_TO_DATE(NULLIF(date, ''), 'DD-Mon-YY'),
+          TRY_TO_DATE(NULLIF(date, ''), 'YYYY-MM-DD')
+        ) AS date,
 
     division,
 
@@ -35,10 +35,10 @@ cleaned AS (
     sales_org,
     
     -- 5. Cast SALES_ to float and rename to sales
-    TRY_CAST(sales_ AS FLOAT) AS sales,
+    COALESCE(TRY_CAST(sales_ AS FLOAT), 0.0) AS sales,
     
     -- 6. Cast UNITS_ON_HAND to integer
-    TRY_CAST(units_on_hand AS INTEGER) AS units_on_hand,
+    COALESCE(TRY_CAST(units_on_hand AS INTEGER), 0) AS units_on_hand,
     
     store
 
